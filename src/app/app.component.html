@@ -1,483 +1,1002 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    all: unset;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
-
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Welcome</span>
-    <div class="spacer"></div>
-    <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
-      <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-        <rect width="400" height="400" fill="none"/>
-        <path d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23" fill="#fff"/>
-      </svg>
-    </a>
-    <a aria-label="Angular on YouTube" target="_blank" rel="noopener" href="https://youtube.com/angular" title="YouTube">
-      <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
-        <path d="M0 0h24v24H0V0z" fill="none"/>
-        <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
-      </svg>
-    </a>
+<div>
+  <app-component1></app-component1>
+  <app-component2></app-component2>
+  <app-component3></app-component3>
+  <app-component4></app-component4>
+  <app-component5></app-component5>
+  <app-component6></app-component6>
+  <app-component7></app-component7>
+  <app-component8></app-component8>
+  <app-component9></app-component9>
+  <app-component10></app-component10>
+  <app-component11></app-component11>
+  <app-component12></app-component12>
+  <app-component13></app-component13>
+  <app-component14></app-component14>
+  <app-component15></app-component15>
+  <app-component16></app-component16>
+  <app-component17></app-component17>
+  <app-component18></app-component18>
+  <app-component19></app-component19>
+  <app-component20></app-component20>
+  <app-component21></app-component21>
+  <app-component22></app-component22>
+  <app-component23></app-component23>
+  <app-component24></app-component24>
+  <app-component25></app-component25>
+  <app-component26></app-component26>
+  <app-component27></app-component27>
+  <app-component28></app-component28>
+  <app-component29></app-component29>
+  <app-component30></app-component30>
+  <app-component31></app-component31>
+  <app-component32></app-component32>
+  <app-component33></app-component33>
+  <app-component34></app-component34>
+  <app-component35></app-component35>
+  <app-component36></app-component36>
+  <app-component37></app-component37>
+  <app-component38></app-component38>
+  <app-component39></app-component39>
+  <app-component40></app-component40>
+  <app-component41></app-component41>
+  <app-component42></app-component42>
+  <app-component43></app-component43>
+  <app-component44></app-component44>
+  <app-component45></app-component45>
+  <app-component46></app-component46>
+  <app-component47></app-component47>
+  <app-component48></app-component48>
+  <app-component49></app-component49>
+  <app-component50></app-component50>
+  <app-component51></app-component51>
+  <app-component52></app-component52>
+  <app-component53></app-component53>
+  <app-component54></app-component54>
+  <app-component55></app-component55>
+  <app-component56></app-component56>
+  <app-component57></app-component57>
+  <app-component58></app-component58>
+  <app-component59></app-component59>
+  <app-component60></app-component60>
+  <app-component61></app-component61>
+  <app-component62></app-component62>
+  <app-component63></app-component63>
+  <app-component64></app-component64>
+  <app-component65></app-component65>
+  <app-component66></app-component66>
+  <app-component67></app-component67>
+  <app-component68></app-component68>
+  <app-component69></app-component69>
+  <app-component70></app-component70>
+  <app-component71></app-component71>
+  <app-component72></app-component72>
+  <app-component73></app-component73>
+  <app-component74></app-component74>
+  <app-component75></app-component75>
+  <app-component76></app-component76>
+  <app-component77></app-component77>
+  <app-component78></app-component78>
+  <app-component79></app-component79>
+  <app-component80></app-component80>
+  <app-component81></app-component81>
+  <app-component82></app-component82>
+  <app-component83></app-component83>
+  <app-component84></app-component84>
+  <app-component85></app-component85>
+  <app-component86></app-component86>
+  <app-component87></app-component87>
+  <app-component88></app-component88>
+  <app-component89></app-component89>
+  <app-component90></app-component90>
+  <app-component91></app-component91>
+  <app-component92></app-component92>
+  <app-component93></app-component93>
+  <app-component94></app-component94>
+  <app-component95></app-component95>
+  <app-component96></app-component96>
+  <app-component97></app-component97>
+  <app-component98></app-component98>
+  <app-component99></app-component99>
+  <app-component100></app-component100>
+  <app-component101></app-component101>
+  <app-component102></app-component102>
+  <app-component103></app-component103>
+  <app-component104></app-component104>
+  <app-component105></app-component105>
+  <app-component106></app-component106>
+  <app-component107></app-component107>
+  <app-component108></app-component108>
+  <app-component109></app-component109>
+  <app-component110></app-component110>
+  <app-component111></app-component111>
+  <app-component112></app-component112>
+  <app-component113></app-component113>
+  <app-component114></app-component114>
+  <app-component115></app-component115>
+  <app-component116></app-component116>
+  <app-component117></app-component117>
+  <app-component118></app-component118>
+  <app-component119></app-component119>
+  <app-component120></app-component120>
+  <app-component121></app-component121>
+  <app-component122></app-component122>
+  <app-component123></app-component123>
+  <app-component124></app-component124>
+  <app-component125></app-component125>
+  <app-component126></app-component126>
+  <app-component127></app-component127>
+  <app-component128></app-component128>
+  <app-component129></app-component129>
+  <app-component130></app-component130>
+  <app-component131></app-component131>
+  <app-component132></app-component132>
+  <app-component133></app-component133>
+  <app-component134></app-component134>
+  <app-component135></app-component135>
+  <app-component136></app-component136>
+  <app-component137></app-component137>
+  <app-component138></app-component138>
+  <app-component139></app-component139>
+  <app-component140></app-component140>
+  <app-component141></app-component141>
+  <app-component142></app-component142>
+  <app-component143></app-component143>
+  <app-component144></app-component144>
+  <app-component145></app-component145>
+  <app-component146></app-component146>
+  <app-component147></app-component147>
+  <app-component148></app-component148>
+  <app-component149></app-component149>
+  <app-component150></app-component150>
+  <app-component151></app-component151>
+  <app-component152></app-component152>
+  <app-component153></app-component153>
+  <app-component154></app-component154>
+  <app-component155></app-component155>
+  <app-component156></app-component156>
+  <app-component157></app-component157>
+  <app-component158></app-component158>
+  <app-component159></app-component159>
+  <app-component160></app-component160>
+  <app-component161></app-component161>
+  <app-component162></app-component162>
+  <app-component163></app-component163>
+  <app-component164></app-component164>
+  <app-component165></app-component165>
+  <app-component166></app-component166>
+  <app-component167></app-component167>
+  <app-component168></app-component168>
+  <app-component169></app-component169>
+  <app-component170></app-component170>
+  <app-component171></app-component171>
+  <app-component172></app-component172>
+  <app-component173></app-component173>
+  <app-component174></app-component174>
+  <app-component175></app-component175>
+  <app-component176></app-component176>
+  <app-component177></app-component177>
+  <app-component178></app-component178>
+  <app-component179></app-component179>
+  <app-component180></app-component180>
+  <app-component181></app-component181>
+  <app-component182></app-component182>
+  <app-component183></app-component183>
+  <app-component184></app-component184>
+  <app-component185></app-component185>
+  <app-component186></app-component186>
+  <app-component187></app-component187>
+  <app-component188></app-component188>
+  <app-component189></app-component189>
+  <app-component190></app-component190>
+  <app-component191></app-component191>
+  <app-component192></app-component192>
+  <app-component193></app-component193>
+  <app-component194></app-component194>
+  <app-component195></app-component195>
+  <app-component196></app-component196>
+  <app-component197></app-component197>
+  <app-component198></app-component198>
+  <app-component199></app-component199>
+  <app-component200></app-component200>
+  <app-component201></app-component201>
+  <app-component202></app-component202>
+  <app-component203></app-component203>
+  <app-component204></app-component204>
+  <app-component205></app-component205>
+  <app-component206></app-component206>
+  <app-component207></app-component207>
+  <app-component208></app-component208>
+  <app-component209></app-component209>
+  <app-component210></app-component210>
+  <app-component211></app-component211>
+  <app-component212></app-component212>
+  <app-component213></app-component213>
+  <app-component214></app-component214>
+  <app-component215></app-component215>
+  <app-component216></app-component216>
+  <app-component217></app-component217>
+  <app-component218></app-component218>
+  <app-component219></app-component219>
+  <app-component220></app-component220>
+  <app-component221></app-component221>
+  <app-component222></app-component222>
+  <app-component223></app-component223>
+  <app-component224></app-component224>
+  <app-component225></app-component225>
+  <app-component226></app-component226>
+  <app-component227></app-component227>
+  <app-component228></app-component228>
+  <app-component229></app-component229>
+  <app-component230></app-component230>
+  <app-component231></app-component231>
+  <app-component232></app-component232>
+  <app-component233></app-component233>
+  <app-component234></app-component234>
+  <app-component235></app-component235>
+  <app-component236></app-component236>
+  <app-component237></app-component237>
+  <app-component238></app-component238>
+  <app-component239></app-component239>
+  <app-component240></app-component240>
+  <app-component241></app-component241>
+  <app-component242></app-component242>
+  <app-component243></app-component243>
+  <app-component244></app-component244>
+  <app-component245></app-component245>
+  <app-component246></app-component246>
+  <app-component247></app-component247>
+  <app-component248></app-component248>
+  <app-component249></app-component249>
+  <app-component250></app-component250>
+  <app-component251></app-component251>
+  <app-component252></app-component252>
+  <app-component253></app-component253>
+  <app-component254></app-component254>
+  <app-component255></app-component255>
+  <app-component256></app-component256>
+  <app-component257></app-component257>
+  <app-component258></app-component258>
+  <app-component259></app-component259>
+  <app-component260></app-component260>
+  <app-component261></app-component261>
+  <app-component262></app-component262>
+  <app-component263></app-component263>
+  <app-component264></app-component264>
+  <app-component265></app-component265>
+  <app-component266></app-component266>
+  <app-component267></app-component267>
+  <app-component268></app-component268>
+  <app-component269></app-component269>
+  <app-component270></app-component270>
+  <app-component271></app-component271>
+  <app-component272></app-component272>
+  <app-component273></app-component273>
+  <app-component274></app-component274>
+  <app-component275></app-component275>
+  <app-component276></app-component276>
+  <app-component277></app-component277>
+  <app-component278></app-component278>
+  <app-component279></app-component279>
+  <app-component280></app-component280>
+  <app-component281></app-component281>
+  <app-component282></app-component282>
+  <app-component283></app-component283>
+  <app-component284></app-component284>
+  <app-component285></app-component285>
+  <app-component286></app-component286>
+  <app-component287></app-component287>
+  <app-component288></app-component288>
+  <app-component289></app-component289>
+  <app-component290></app-component290>
+  <app-component291></app-component291>
+  <app-component292></app-component292>
+  <app-component293></app-component293>
+  <app-component294></app-component294>
+  <app-component295></app-component295>
+  <app-component296></app-component296>
+  <app-component297></app-component297>
+  <app-component298></app-component298>
+  <app-component299></app-component299>
+  <app-component300></app-component300>
+  <app-component301></app-component301>
+  <app-component302></app-component302>
+  <app-component303></app-component303>
+  <app-component304></app-component304>
+  <app-component305></app-component305>
+  <app-component306></app-component306>
+  <app-component307></app-component307>
+  <app-component308></app-component308>
+  <app-component309></app-component309>
+  <app-component310></app-component310>
+  <app-component311></app-component311>
+  <app-component312></app-component312>
+  <app-component313></app-component313>
+  <app-component314></app-component314>
+  <app-component315></app-component315>
+  <app-component316></app-component316>
+  <app-component317></app-component317>
+  <app-component318></app-component318>
+  <app-component319></app-component319>
+  <app-component320></app-component320>
+  <app-component321></app-component321>
+  <app-component322></app-component322>
+  <app-component323></app-component323>
+  <app-component324></app-component324>
+  <app-component325></app-component325>
+  <app-component326></app-component326>
+  <app-component327></app-component327>
+  <app-component328></app-component328>
+  <app-component329></app-component329>
+  <app-component330></app-component330>
+  <app-component331></app-component331>
+  <app-component332></app-component332>
+  <app-component333></app-component333>
+  <app-component334></app-component334>
+  <app-component335></app-component335>
+  <app-component336></app-component336>
+  <app-component337></app-component337>
+  <app-component338></app-component338>
+  <app-component339></app-component339>
+  <app-component340></app-component340>
+  <app-component341></app-component341>
+  <app-component342></app-component342>
+  <app-component343></app-component343>
+  <app-component344></app-component344>
+  <app-component345></app-component345>
+  <app-component346></app-component346>
+  <app-component347></app-component347>
+  <app-component348></app-component348>
+  <app-component349></app-component349>
+  <app-component350></app-component350>
+  <app-component351></app-component351>
+  <app-component352></app-component352>
+  <app-component353></app-component353>
+  <app-component354></app-component354>
+  <app-component355></app-component355>
+  <app-component356></app-component356>
+  <app-component357></app-component357>
+  <app-component358></app-component358>
+  <app-component359></app-component359>
+  <app-component360></app-component360>
+  <app-component361></app-component361>
+  <app-component362></app-component362>
+  <app-component363></app-component363>
+  <app-component364></app-component364>
+  <app-component365></app-component365>
+  <app-component366></app-component366>
+  <app-component367></app-component367>
+  <app-component368></app-component368>
+  <app-component369></app-component369>
+  <app-component370></app-component370>
+  <app-component371></app-component371>
+  <app-component372></app-component372>
+  <app-component373></app-component373>
+  <app-component374></app-component374>
+  <app-component375></app-component375>
+  <app-component376></app-component376>
+  <app-component377></app-component377>
+  <app-component378></app-component378>
+  <app-component379></app-component379>
+  <app-component380></app-component380>
+  <app-component381></app-component381>
+  <app-component382></app-component382>
+  <app-component383></app-component383>
+  <app-component384></app-component384>
+  <app-component385></app-component385>
+  <app-component386></app-component386>
+  <app-component387></app-component387>
+  <app-component388></app-component388>
+  <app-component389></app-component389>
+  <app-component390></app-component390>
+  <app-component391></app-component391>
+  <app-component392></app-component392>
+  <app-component393></app-component393>
+  <app-component394></app-component394>
+  <app-component395></app-component395>
+  <app-component396></app-component396>
+  <app-component397></app-component397>
+  <app-component398></app-component398>
+  <app-component399></app-component399>
+  <app-component400></app-component400>
+  <app-component401></app-component401>
+  <app-component402></app-component402>
+  <app-component403></app-component403>
+  <app-component404></app-component404>
+  <app-component405></app-component405>
+  <app-component406></app-component406>
+  <app-component407></app-component407>
+  <app-component408></app-component408>
+  <app-component409></app-component409>
+  <app-component410></app-component410>
+  <app-component411></app-component411>
+  <app-component412></app-component412>
+  <app-component413></app-component413>
+  <app-component414></app-component414>
+  <app-component415></app-component415>
+  <app-component416></app-component416>
+  <app-component417></app-component417>
+  <app-component418></app-component418>
+  <app-component419></app-component419>
+  <app-component420></app-component420>
+  <app-component421></app-component421>
+  <app-component422></app-component422>
+  <app-component423></app-component423>
+  <app-component424></app-component424>
+  <app-component425></app-component425>
+  <app-component426></app-component426>
+  <app-component427></app-component427>
+  <app-component428></app-component428>
+  <app-component429></app-component429>
+  <app-component430></app-component430>
+  <app-component431></app-component431>
+  <app-component432></app-component432>
+  <app-component433></app-component433>
+  <app-component434></app-component434>
+  <app-component435></app-component435>
+  <app-component436></app-component436>
+  <app-component437></app-component437>
+  <app-component438></app-component438>
+  <app-component439></app-component439>
+  <app-component440></app-component440>
+  <app-component441></app-component441>
+  <app-component442></app-component442>
+  <app-component443></app-component443>
+  <app-component444></app-component444>
+  <app-component445></app-component445>
+  <app-component446></app-component446>
+  <app-component447></app-component447>
+  <app-component448></app-component448>
+  <app-component449></app-component449>
+  <app-component450></app-component450>
+  <app-component451></app-component451>
+  <app-component452></app-component452>
+  <app-component453></app-component453>
+  <app-component454></app-component454>
+  <app-component455></app-component455>
+  <app-component456></app-component456>
+  <app-component457></app-component457>
+  <app-component458></app-component458>
+  <app-component459></app-component459>
+  <app-component460></app-component460>
+  <app-component461></app-component461>
+  <app-component462></app-component462>
+  <app-component463></app-component463>
+  <app-component464></app-component464>
+  <app-component465></app-component465>
+  <app-component466></app-component466>
+  <app-component467></app-component467>
+  <app-component468></app-component468>
+  <app-component469></app-component469>
+  <app-component470></app-component470>
+  <app-component471></app-component471>
+  <app-component472></app-component472>
+  <app-component473></app-component473>
+  <app-component474></app-component474>
+  <app-component475></app-component475>
+  <app-component476></app-component476>
+  <app-component477></app-component477>
+  <app-component478></app-component478>
+  <app-component479></app-component479>
+  <app-component480></app-component480>
+  <app-component481></app-component481>
+  <app-component482></app-component482>
+  <app-component483></app-component483>
+  <app-component484></app-component484>
+  <app-component485></app-component485>
+  <app-component486></app-component486>
+  <app-component487></app-component487>
+  <app-component488></app-component488>
+  <app-component489></app-component489>
+  <app-component490></app-component490>
+  <app-component491></app-component491>
+  <app-component492></app-component492>
+  <app-component493></app-component493>
+  <app-component494></app-component494>
+  <app-component495></app-component495>
+  <app-component496></app-component496>
+  <app-component497></app-component497>
+  <app-component498></app-component498>
+  <app-component499></app-component499>
+  <app-component500></app-component500>
+  <app-component501></app-component501>
+  <app-component502></app-component502>
+  <app-component503></app-component503>
+  <app-component504></app-component504>
+  <app-component505></app-component505>
+  <app-component506></app-component506>
+  <app-component507></app-component507>
+  <app-component508></app-component508>
+  <app-component509></app-component509>
+  <app-component510></app-component510>
+  <app-component511></app-component511>
+  <app-component512></app-component512>
+  <app-component513></app-component513>
+  <app-component514></app-component514>
+  <app-component515></app-component515>
+  <app-component516></app-component516>
+  <app-component517></app-component517>
+  <app-component518></app-component518>
+  <app-component519></app-component519>
+  <app-component520></app-component520>
+  <app-component521></app-component521>
+  <app-component522></app-component522>
+  <app-component523></app-component523>
+  <app-component524></app-component524>
+  <app-component525></app-component525>
+  <app-component526></app-component526>
+  <app-component527></app-component527>
+  <app-component528></app-component528>
+  <app-component529></app-component529>
+  <app-component530></app-component530>
+  <app-component531></app-component531>
+  <app-component532></app-component532>
+  <app-component533></app-component533>
+  <app-component534></app-component534>
+  <app-component535></app-component535>
+  <app-component536></app-component536>
+  <app-component537></app-component537>
+  <app-component538></app-component538>
+  <app-component539></app-component539>
+  <app-component540></app-component540>
+  <app-component541></app-component541>
+  <app-component542></app-component542>
+  <app-component543></app-component543>
+  <app-component544></app-component544>
+  <app-component545></app-component545>
+  <app-component546></app-component546>
+  <app-component547></app-component547>
+  <app-component548></app-component548>
+  <app-component549></app-component549>
+  <app-component550></app-component550>
+  <app-component551></app-component551>
+  <app-component552></app-component552>
+  <app-component553></app-component553>
+  <app-component554></app-component554>
+  <app-component555></app-component555>
+  <app-component556></app-component556>
+  <app-component557></app-component557>
+  <app-component558></app-component558>
+  <app-component559></app-component559>
+  <app-component560></app-component560>
+  <app-component561></app-component561>
+  <app-component562></app-component562>
+  <app-component563></app-component563>
+  <app-component564></app-component564>
+  <app-component565></app-component565>
+  <app-component566></app-component566>
+  <app-component567></app-component567>
+  <app-component568></app-component568>
+  <app-component569></app-component569>
+  <app-component570></app-component570>
+  <app-component571></app-component571>
+  <app-component572></app-component572>
+  <app-component573></app-component573>
+  <app-component574></app-component574>
+  <app-component575></app-component575>
+  <app-component576></app-component576>
+  <app-component577></app-component577>
+  <app-component578></app-component578>
+  <app-component579></app-component579>
+  <app-component580></app-component580>
+  <app-component581></app-component581>
+  <app-component582></app-component582>
+  <app-component583></app-component583>
+  <app-component584></app-component584>
+  <app-component585></app-component585>
+  <app-component586></app-component586>
+  <app-component587></app-component587>
+  <app-component588></app-component588>
+  <app-component589></app-component589>
+  <app-component590></app-component590>
+  <app-component591></app-component591>
+  <app-component592></app-component592>
+  <app-component593></app-component593>
+  <app-component594></app-component594>
+  <app-component595></app-component595>
+  <app-component596></app-component596>
+  <app-component597></app-component597>
+  <app-component598></app-component598>
+  <app-component599></app-component599>
+  <app-component600></app-component600>
+  <app-component601></app-component601>
+  <app-component602></app-component602>
+  <app-component603></app-component603>
+  <app-component604></app-component604>
+  <app-component605></app-component605>
+  <app-component606></app-component606>
+  <app-component607></app-component607>
+  <app-component608></app-component608>
+  <app-component609></app-component609>
+  <app-component610></app-component610>
+  <app-component611></app-component611>
+  <app-component612></app-component612>
+  <app-component613></app-component613>
+  <app-component614></app-component614>
+  <app-component615></app-component615>
+  <app-component616></app-component616>
+  <app-component617></app-component617>
+  <app-component618></app-component618>
+  <app-component619></app-component619>
+  <app-component620></app-component620>
+  <app-component621></app-component621>
+  <app-component622></app-component622>
+  <app-component623></app-component623>
+  <app-component624></app-component624>
+  <app-component625></app-component625>
+  <app-component626></app-component626>
+  <app-component627></app-component627>
+  <app-component628></app-component628>
+  <app-component629></app-component629>
+  <app-component630></app-component630>
+  <app-component631></app-component631>
+  <app-component632></app-component632>
+  <app-component633></app-component633>
+  <app-component634></app-component634>
+  <app-component635></app-component635>
+  <app-component636></app-component636>
+  <app-component637></app-component637>
+  <app-component638></app-component638>
+  <app-component639></app-component639>
+  <app-component640></app-component640>
+  <app-component641></app-component641>
+  <app-component642></app-component642>
+  <app-component643></app-component643>
+  <app-component644></app-component644>
+  <app-component645></app-component645>
+  <app-component646></app-component646>
+  <app-component647></app-component647>
+  <app-component648></app-component648>
+  <app-component649></app-component649>
+  <app-component650></app-component650>
+  <app-component651></app-component651>
+  <app-component652></app-component652>
+  <app-component653></app-component653>
+  <app-component654></app-component654>
+  <app-component655></app-component655>
+  <app-component656></app-component656>
+  <app-component657></app-component657>
+  <app-component658></app-component658>
+  <app-component659></app-component659>
+  <app-component660></app-component660>
+  <app-component661></app-component661>
+  <app-component662></app-component662>
+  <app-component663></app-component663>
+  <app-component664></app-component664>
+  <app-component665></app-component665>
+  <app-component666></app-component666>
+  <app-component667></app-component667>
+  <app-component668></app-component668>
+  <app-component669></app-component669>
+  <app-component670></app-component670>
+  <app-component671></app-component671>
+  <app-component672></app-component672>
+  <app-component673></app-component673>
+  <app-component674></app-component674>
+  <app-component675></app-component675>
+  <app-component676></app-component676>
+  <app-component677></app-component677>
+  <app-component678></app-component678>
+  <app-component679></app-component679>
+  <app-component680></app-component680>
+  <app-component681></app-component681>
+  <app-component682></app-component682>
+  <app-component683></app-component683>
+  <app-component684></app-component684>
+  <app-component685></app-component685>
+  <app-component686></app-component686>
+  <app-component687></app-component687>
+  <app-component688></app-component688>
+  <app-component689></app-component689>
+  <app-component690></app-component690>
+  <app-component691></app-component691>
+  <app-component692></app-component692>
+  <app-component693></app-component693>
+  <app-component694></app-component694>
+  <app-component695></app-component695>
+  <app-component696></app-component696>
+  <app-component697></app-component697>
+  <app-component698></app-component698>
+  <app-component699></app-component699>
+  <app-component700></app-component700>
+  <app-component701></app-component701>
+  <app-component702></app-component702>
+  <app-component703></app-component703>
+  <app-component704></app-component704>
+  <app-component705></app-component705>
+  <app-component706></app-component706>
+  <app-component707></app-component707>
+  <app-component708></app-component708>
+  <app-component709></app-component709>
+  <app-component710></app-component710>
+  <app-component711></app-component711>
+  <app-component712></app-component712>
+  <app-component713></app-component713>
+  <app-component714></app-component714>
+  <app-component715></app-component715>
+  <app-component716></app-component716>
+  <app-component717></app-component717>
+  <app-component718></app-component718>
+  <app-component719></app-component719>
+  <app-component720></app-component720>
+  <app-component721></app-component721>
+  <app-component722></app-component722>
+  <app-component723></app-component723>
+  <app-component724></app-component724>
+  <app-component725></app-component725>
+  <app-component726></app-component726>
+  <app-component727></app-component727>
+  <app-component728></app-component728>
+  <app-component729></app-component729>
+  <app-component730></app-component730>
+  <app-component731></app-component731>
+  <app-component732></app-component732>
+  <app-component733></app-component733>
+  <app-component734></app-component734>
+  <app-component735></app-component735>
+  <app-component736></app-component736>
+  <app-component737></app-component737>
+  <app-component738></app-component738>
+  <app-component739></app-component739>
+  <app-component740></app-component740>
+  <app-component741></app-component741>
+  <app-component742></app-component742>
+  <app-component743></app-component743>
+  <app-component744></app-component744>
+  <app-component745></app-component745>
+  <app-component746></app-component746>
+  <app-component747></app-component747>
+  <app-component748></app-component748>
+  <app-component749></app-component749>
+  <app-component750></app-component750>
+  <app-component751></app-component751>
+  <app-component752></app-component752>
+  <app-component753></app-component753>
+  <app-component754></app-component754>
+  <app-component755></app-component755>
+  <app-component756></app-component756>
+  <app-component757></app-component757>
+  <app-component758></app-component758>
+  <app-component759></app-component759>
+  <app-component760></app-component760>
+  <app-component761></app-component761>
+  <app-component762></app-component762>
+  <app-component763></app-component763>
+  <app-component764></app-component764>
+  <app-component765></app-component765>
+  <app-component766></app-component766>
+  <app-component767></app-component767>
+  <app-component768></app-component768>
+  <app-component769></app-component769>
+  <app-component770></app-component770>
+  <app-component771></app-component771>
+  <app-component772></app-component772>
+  <app-component773></app-component773>
+  <app-component774></app-component774>
+  <app-component775></app-component775>
+  <app-component776></app-component776>
+  <app-component777></app-component777>
+  <app-component778></app-component778>
+  <app-component779></app-component779>
+  <app-component780></app-component780>
+  <app-component781></app-component781>
+  <app-component782></app-component782>
+  <app-component783></app-component783>
+  <app-component784></app-component784>
+  <app-component785></app-component785>
+  <app-component786></app-component786>
+  <app-component787></app-component787>
+  <app-component788></app-component788>
+  <app-component789></app-component789>
+  <app-component790></app-component790>
+  <app-component791></app-component791>
+  <app-component792></app-component792>
+  <app-component793></app-component793>
+  <app-component794></app-component794>
+  <app-component795></app-component795>
+  <app-component796></app-component796>
+  <app-component797></app-component797>
+  <app-component798></app-component798>
+  <app-component799></app-component799>
+  <app-component800></app-component800>
+  <app-component801></app-component801>
+  <app-component802></app-component802>
+  <app-component803></app-component803>
+  <app-component804></app-component804>
+  <app-component805></app-component805>
+  <app-component806></app-component806>
+  <app-component807></app-component807>
+  <app-component808></app-component808>
+  <app-component809></app-component809>
+  <app-component810></app-component810>
+  <app-component811></app-component811>
+  <app-component812></app-component812>
+  <app-component813></app-component813>
+  <app-component814></app-component814>
+  <app-component815></app-component815>
+  <app-component816></app-component816>
+  <app-component817></app-component817>
+  <app-component818></app-component818>
+  <app-component819></app-component819>
+  <app-component820></app-component820>
+  <app-component821></app-component821>
+  <app-component822></app-component822>
+  <app-component823></app-component823>
+  <app-component824></app-component824>
+  <app-component825></app-component825>
+  <app-component826></app-component826>
+  <app-component827></app-component827>
+  <app-component828></app-component828>
+  <app-component829></app-component829>
+  <app-component830></app-component830>
+  <app-component831></app-component831>
+  <app-component832></app-component832>
+  <app-component833></app-component833>
+  <app-component834></app-component834>
+  <app-component835></app-component835>
+  <app-component836></app-component836>
+  <app-component837></app-component837>
+  <app-component838></app-component838>
+  <app-component839></app-component839>
+  <app-component840></app-component840>
+  <app-component841></app-component841>
+  <app-component842></app-component842>
+  <app-component843></app-component843>
+  <app-component844></app-component844>
+  <app-component845></app-component845>
+  <app-component846></app-component846>
+  <app-component847></app-component847>
+  <app-component848></app-component848>
+  <app-component849></app-component849>
+  <app-component850></app-component850>
+  <app-component851></app-component851>
+  <app-component852></app-component852>
+  <app-component853></app-component853>
+  <app-component854></app-component854>
+  <app-component855></app-component855>
+  <app-component856></app-component856>
+  <app-component857></app-component857>
+  <app-component858></app-component858>
+  <app-component859></app-component859>
+  <app-component860></app-component860>
+  <app-component861></app-component861>
+  <app-component862></app-component862>
+  <app-component863></app-component863>
+  <app-component864></app-component864>
+  <app-component865></app-component865>
+  <app-component866></app-component866>
+  <app-component867></app-component867>
+  <app-component868></app-component868>
+  <app-component869></app-component869>
+  <app-component870></app-component870>
+  <app-component871></app-component871>
+  <app-component872></app-component872>
+  <app-component873></app-component873>
+  <app-component874></app-component874>
+  <app-component875></app-component875>
+  <app-component876></app-component876>
+  <app-component877></app-component877>
+  <app-component878></app-component878>
+  <app-component879></app-component879>
+  <app-component880></app-component880>
+  <app-component881></app-component881>
+  <app-component882></app-component882>
+  <app-component883></app-component883>
+  <app-component884></app-component884>
+  <app-component885></app-component885>
+  <app-component886></app-component886>
+  <app-component887></app-component887>
+  <app-component888></app-component888>
+  <app-component889></app-component889>
+  <app-component890></app-component890>
+  <app-component891></app-component891>
+  <app-component892></app-component892>
+  <app-component893></app-component893>
+  <app-component894></app-component894>
+  <app-component895></app-component895>
+  <app-component896></app-component896>
+  <app-component897></app-component897>
+  <app-component898></app-component898>
+  <app-component899></app-component899>
+  <app-component900></app-component900>
+  <app-component901></app-component901>
+  <app-component902></app-component902>
+  <app-component903></app-component903>
+  <app-component904></app-component904>
+  <app-component905></app-component905>
+  <app-component906></app-component906>
+  <app-component907></app-component907>
+  <app-component908></app-component908>
+  <app-component909></app-component909>
+  <app-component910></app-component910>
+  <app-component911></app-component911>
+  <app-component912></app-component912>
+  <app-component913></app-component913>
+  <app-component914></app-component914>
+  <app-component915></app-component915>
+  <app-component916></app-component916>
+  <app-component917></app-component917>
+  <app-component918></app-component918>
+  <app-component919></app-component919>
+  <app-component920></app-component920>
+  <app-component921></app-component921>
+  <app-component922></app-component922>
+  <app-component923></app-component923>
+  <app-component924></app-component924>
+  <app-component925></app-component925>
+  <app-component926></app-component926>
+  <app-component927></app-component927>
+  <app-component928></app-component928>
+  <app-component929></app-component929>
+  <app-component930></app-component930>
+  <app-component931></app-component931>
+  <app-component932></app-component932>
+  <app-component933></app-component933>
+  <app-component934></app-component934>
+  <app-component935></app-component935>
+  <app-component936></app-component936>
+  <app-component937></app-component937>
+  <app-component938></app-component938>
+  <app-component939></app-component939>
+  <app-component940></app-component940>
+  <app-component941></app-component941>
+  <app-component942></app-component942>
+  <app-component943></app-component943>
+  <app-component944></app-component944>
+  <app-component945></app-component945>
+  <app-component946></app-component946>
+  <app-component947></app-component947>
+  <app-component948></app-component948>
+  <app-component949></app-component949>
+  <app-component950></app-component950>
+  <app-component951></app-component951>
+  <app-component952></app-component952>
+  <app-component953></app-component953>
+  <app-component954></app-component954>
+  <app-component955></app-component955>
+  <app-component956></app-component956>
+  <app-component957></app-component957>
+  <app-component958></app-component958>
+  <app-component959></app-component959>
+  <app-component960></app-component960>
+  <app-component961></app-component961>
+  <app-component962></app-component962>
+  <app-component963></app-component963>
+  <app-component964></app-component964>
+  <app-component965></app-component965>
+  <app-component966></app-component966>
+  <app-component967></app-component967>
+  <app-component968></app-component968>
+  <app-component969></app-component969>
+  <app-component970></app-component970>
+  <app-component971></app-component971>
+  <app-component972></app-component972>
+  <app-component973></app-component973>
+  <app-component974></app-component974>
+  <app-component975></app-component975>
+  <app-component976></app-component976>
+  <app-component977></app-component977>
+  <app-component978></app-component978>
+  <app-component979></app-component979>
+  <app-component980></app-component980>
+  <app-component981></app-component981>
+  <app-component982></app-component982>
+  <app-component983></app-component983>
+  <app-component984></app-component984>
+  <app-component985></app-component985>
+  <app-component986></app-component986>
+  <app-component987></app-component987>
+  <app-component988></app-component988>
+  <app-component989></app-component989>
+  <app-component990></app-component990>
+  <app-component991></app-component991>
+  <app-component992></app-component992>
+  <app-component993></app-component993>
+  <app-component994></app-component994>
+  <app-component995></app-component995>
+  <app-component996></app-component996>
+  <app-component997></app-component997>
+  <app-component998></app-component998>
+  <app-component999></app-component999>
+  <app-component1000></app-component1000>
 </div>
-
-<div class="content" role="main">
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-
-    <svg id="rocket" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
-      <title>Rocket Ship</title>
-      <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#dd0031"/>
-        <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
-          <path id="Path_33" data-name="Path 33" d="M3.4,42.615a3.084,3.084,0,0,0,3.553,3.553,21.419,21.419,0,0,0,12.215-6.107L9.511,30.4A21.419,21.419,0,0,0,3.4,42.615Z" transform="translate(0.371 3.363)" fill="#fff"/>
-          <path id="Path_34" data-name="Path 34" d="M53.3,3.221A3.09,3.09,0,0,0,50.081,0,48.227,48.227,0,0,0,18.322,13.437c-6-1.666-14.991-1.221-18.322,7.218A33.892,33.892,0,0,1,9.439,25.1l-.333.666a3.013,3.013,0,0,0,.555,3.553L23.985,43.641a2.9,2.9,0,0,0,3.553.555l.666-.333A33.892,33.892,0,0,1,32.647,53.3c8.55-3.664,8.884-12.326,7.218-18.322A48.227,48.227,0,0,0,53.3,3.221ZM34.424,9.772a6.439,6.439,0,1,1,9.106,9.106,6.368,6.368,0,0,1-9.106,0A6.467,6.467,0,0,1,34.424,9.772Z" transform="translate(0 0.005)" fill="#fff"/>
-        </g>
-      </g>
-    </svg>
-
-    <span>{{ title }} app is running!</span>
-
-    <svg id="rocket-smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
-      <title>Rocket Ship Smoke</title>
-      <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
-    </svg>
-
-  </div>
-
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-      <span>Learn Angular</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-      <span>CLI Documentation</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://material.angular.io">
-      <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px" width="21.813" height="23.453" viewBox="0 0 179.2 192.7"><path fill="#ffa726" d="M89.4 0 0 32l13.5 118.4 75.9 42.3 76-42.3L179.2 32 89.4 0z"/><path fill="#fb8c00" d="M89.4 0v192.7l76-42.3L179.2 32 89.4 0z"/><path fill="#ffe0b2" d="m102.9 146.3-63.3-30.5 36.3-22.4 63.7 30.6-36.7 22.3z"/><path fill="#fff3e0" d="M102.9 122.8 39.6 92.2l36.3-22.3 63.7 30.6-36.7 22.3z"/><path fill="#fff" d="M102.9 99.3 39.6 68.7l36.3-22.4 63.7 30.6-36.7 22.4z"/></svg>
-      <span>Angular Material</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-      <span>Angular Blog</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/devtools/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M14.73,13.31C15.52,12.24,16,10.93,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.43,0,2.74-0.48,3.81-1.27L19.59,21L21,19.59L14.73,13.31z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5S14,7.01,14,9.5 S11.99,14,9.5,14z"/><polygon points="10.29,8.44 9.5,6 8.71,8.44 6.25,8.44 8.26,10.03 7.49,12.5 9.5,10.97 11.51,12.5 10.74,10.03 12.75,8.44"/></g></g></svg>
-      <span>Angular DevTools</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  <div class="card-container">
-    <button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>New Component</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Angular Material</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add PWA Support</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add Dependency</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Run and Watch Tests</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Build for Production</span>
-    </button>
-  </div>
-
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>ng generate component xyz</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build</pre>
-  </div>
-
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
-        <title>Meetup Logo</title>
-        <path id="logo--mSwarm" d="M21.221,14.95A4.393,4.393,0,0,1,17.6,19.281a4.452,4.452,0,0,1-.8.069c-.09,0-.125.035-.154.117a2.939,2.939,0,0,1-2.506,2.091,2.868,2.868,0,0,1-2.248-.624.168.168,0,0,0-.245-.005,3.926,3.926,0,0,1-2.589.741,4.015,4.015,0,0,1-3.7-3.347,2.7,2.7,0,0,1-.043-.38c0-.106-.042-.146-.143-.166a3.524,3.524,0,0,1-1.516-.69A3.623,3.623,0,0,1,2.23,14.557a3.66,3.66,0,0,1,1.077-3.085.138.138,0,0,0,.026-.2,3.348,3.348,0,0,1-.451-1.821,3.46,3.46,0,0,1,2.749-3.28.44.44,0,0,0,.355-.281,5.072,5.072,0,0,1,3.863-3,5.028,5.028,0,0,1,3.555.666.31.31,0,0,0,.271.03A4.5,4.5,0,0,1,18.3,4.7a4.4,4.4,0,0,1,1.334,2.751,3.658,3.658,0,0,1,.022.706.131.131,0,0,0,.1.157,2.432,2.432,0,0,1,1.574,1.645,2.464,2.464,0,0,1-.7,2.616c-.065.064-.051.1-.014.166A4.321,4.321,0,0,1,21.221,14.95ZM13.4,14.607a2.09,2.09,0,0,0,1.409,1.982,4.7,4.7,0,0,0,1.275.221,1.807,1.807,0,0,0,.9-.151.542.542,0,0,0,.321-.545.558.558,0,0,0-.359-.534,1.2,1.2,0,0,0-.254-.078c-.262-.047-.526-.086-.787-.138a.674.674,0,0,1-.617-.75,3.394,3.394,0,0,1,.218-1.109c.217-.658.509-1.286.79-1.918a15.609,15.609,0,0,0,.745-1.86,1.95,1.95,0,0,0,.06-1.073,1.286,1.286,0,0,0-1.051-1.033,1.977,1.977,0,0,0-1.521.2.339.339,0,0,1-.446-.042c-.1-.092-.2-.189-.307-.284a1.214,1.214,0,0,0-1.643-.061,7.563,7.563,0,0,1-.614.512A.588.588,0,0,1,10.883,8c-.215-.115-.437-.215-.659-.316a2.153,2.153,0,0,0-.695-.248A2.091,2.091,0,0,0,7.541,8.562a9.915,9.915,0,0,0-.405.986c-.559,1.545-1.015,3.123-1.487,4.7a1.528,1.528,0,0,0,.634,1.777,1.755,1.755,0,0,0,1.5.211,1.35,1.35,0,0,0,.824-.858c.543-1.281,1.032-2.584,1.55-3.875.142-.355.28-.712.432-1.064a.548.548,0,0,1,.851-.24.622.622,0,0,1,.185.539,2.161,2.161,0,0,1-.181.621c-.337.852-.68,1.7-1.018,2.552a2.564,2.564,0,0,0-.173.528.624.624,0,0,0,.333.71,1.073,1.073,0,0,0,.814.034,1.22,1.22,0,0,0,.657-.655q.758-1.488,1.511-2.978.35-.687.709-1.37a1.073,1.073,0,0,1,.357-.434.43.43,0,0,1,.463-.016.373.373,0,0,1,.153.387.7.7,0,0,1-.057.236c-.065.157-.127.316-.2.469-.42.883-.846,1.763-1.262,2.648A2.463,2.463,0,0,0,13.4,14.607Zm5.888,6.508a1.09,1.09,0,0,0-2.179.006,1.09,1.09,0,0,0,2.179-.006ZM1.028,12.139a1.038,1.038,0,1,0,.01-2.075,1.038,1.038,0,0,0-.01,2.075ZM13.782.528a1.027,1.027,0,1,0-.011,2.055A1.027,1.027,0,0,0,13.782.528ZM22.21,6.95a.882.882,0,0,0-1.763.011A.882.882,0,0,0,22.21,6.95ZM4.153,4.439a.785.785,0,1,0,.787-.78A.766.766,0,0,0,4.153,4.439Zm8.221,18.22a.676.676,0,1,0-.677.666A.671.671,0,0,0,12.374,22.658ZM22.872,12.2a.674.674,0,0,0-.665.665.656.656,0,0,0,.655.643.634.634,0,0,0,.655-.644A.654.654,0,0,0,22.872,12.2ZM7.171-.123A.546.546,0,0,0,6.613.43a.553.553,0,1,0,1.106,0A.539.539,0,0,0,7.171-.123ZM24.119,9.234a.507.507,0,0,0-.493.488.494.494,0,0,0,.494.494.48.48,0,0,0,.487-.483A.491.491,0,0,0,24.119,9.234Zm-19.454,9.7a.5.5,0,0,0-.488-.488.491.491,0,0,0-.487.5.483.483,0,0,0,.491.479A.49.49,0,0,0,4.665,18.936Z" transform="translate(0 0.123)" fill="#f64060"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Join the Conversation on Discord" href="https://discord.gg/angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 245 240">
-        <title>Discord Logo</title>
-        <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
-        <path d="M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3-18.5 12.8 11.9 12.1 11.2 21.5 19V40.6c0-11.4-9.2-20.6-20.5-20.6zm-38.6 130.6s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-2.3-.9-4.8-2-7.3-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.3-1.8-1-2.8-1.7-2.8-1.7s4.8 8 17.5 11.8c-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c10.7-4.7 19.2-6 22.7-6.3.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2z"/>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-      Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
-        <div class="github-star-badge">
-            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Star
-        </div>
-      </a>
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </a>
-  </footer>
-
-  <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <title>Gray Clouds Background</title>
-    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
-  </svg>
-
-</div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
