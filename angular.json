@@ -94,5 +94,11 @@
         }
       }
     }
+  },
+  "cli": {
+    "cache": {
+      "enabled": true,
+      "environment": "all"
+    }
   }
 }
